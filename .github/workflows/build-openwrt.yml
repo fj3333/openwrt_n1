@@ -22,11 +22,11 @@ on:
     types: [started]
 
 env:
-  REPO_URL: https://github.com/Lienol/openwrt
-  REPO_BRANCH: dev-19.07
+  REPO_URL: https://github.com/fj3333/lede
+  REPO_BRANCH: master
   CONFIG_FILE: .config
   DIY_SH: diy.sh
-  FREE_UP_DISK: true
+  FREE_UP_DISK: false
   SSH_ACTIONS: true
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
@@ -97,7 +97,9 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-        make -j$(nproc) || make -j1 V=s
+#        make -j$(nproc) || make -j1 V=s
+        make package/lean/luci-app-music-remote-center/{clean,compile} V=s
+        make package/lean/luci-app-vssr/{clean,compile} V=s
         echo "::set-output name=status::success"
 
     - name: Upload bin directory
