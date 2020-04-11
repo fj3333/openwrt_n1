@@ -97,7 +97,6 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-#        make -j$(nproc) || make -j1 V=s
         make package/lean/luci-app-music-remote-center/{clean,compile} V=s
         make package/lean/luci-app-vssr/{clean,compile} V=s
         echo "::set-output name=status::success"
